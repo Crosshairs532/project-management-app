@@ -2,22 +2,35 @@ import React from "react";
 import LoginForm from "../../../components/forms/LoginForm";
 const LoginPage = () => {
   return (
-    <div className=" grid grid-cols-2 gap-x-2.5 h-[100vh]">
-      <div className=" border-2 flex justify-center items-center">
-        <div className=" border-2 text-left  w-[30vw] h-[40vh]">
-          <h1 className=" text-3xl font-semibold">
+    <div className=" grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-x-2.5 h-[100vh]">
+      <div className=" sm:hidden lg:flex md:flex Login-text relative bg-[#EFF1F3] justify-center items-center">
+        <div className=" absolute w-[10vw] h-[10vw]  bg-[#4E6E5D] -translate-x-1/2 -translate-y-[10%] blur-[80px] "></div>
+        <div className=" absolute w-[10vw] h-[10vw]  bg-[#AD8A64] -translate-x-[20%] -translate-y-[90%] blur-[80px] "></div>
+        <div className=" z-10 text-left w-[30vw] h-[40vh]">
+          <h1 className=" text-6xl font-semibold">
             Welcome to{" "}
             <span>
-              BiTech<span>X</span>
+              BiTech<span className=" text-[#A44A3F]">X</span>
             </span>
             !
           </h1>
-          <p>Project Management App</p>
+          <p className=" pt-1.5">Project Management App</p>
         </div>
       </div>
-      <div className=" border-2">
-        Login form
-        <LoginForm />
+      <div className=" Login-form flex justify-center items-center">
+        <div className=" sm:block md:hidden lg:hidden z-10 text-left w-[30vw] h-[40vh]">
+          <h1 className=" text-6xl font-semibold">
+            Welcome to{" "}
+            <span>
+              BiTech<span className=" text-[#A44A3F]">X</span>
+            </span>
+            !
+          </h1>
+          <p className=" pt-1.5">Project Management App</p>
+        </div>
+        <div className="  w-[50%] h-[50%]">
+          <LoginForm />
+        </div>
       </div>
     </div>
   );
