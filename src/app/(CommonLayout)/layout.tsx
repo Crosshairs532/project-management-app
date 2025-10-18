@@ -1,4 +1,4 @@
-import Link from "next/link";
+"use client";
 import React from "react";
 import {
   Sidebar,
@@ -6,16 +6,24 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Navbar } from "@/components/ui/Navbar";
+import BitechxProvider from "@/lib/Provider/BitechxProvider";
+import StoreProvider from "../storeProvider";
 
 const CommonLayout = ({ children }) => {
   return (
-    <div className=" min-h-screen">
-      <SidebarProvider>
-        <Navbar />
-        <SidebarTrigger />
-        <div className=" border-2 w-[100%] px-4 py-2">{children}</div>
-      </SidebarProvider>
-    </div>
+    <body className={`antialiased`} suppressHydrationWarning={true}>
+      <BitechxProvider>
+        <StoreProvider>
+          <div className=" min-h-screen">
+            <SidebarProvider>
+              <Navbar />
+              <SidebarTrigger />
+              <div className=" w-[100%] px-4 py-2">{children}</div>
+            </SidebarProvider>
+          </div>
+        </StoreProvider>
+      </BitechxProvider>
+    </body>
   );
 };
 

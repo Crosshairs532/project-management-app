@@ -1,33 +1,9 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import StoreProvider from "./storeProvider";
-import BitechxProvider from "../lib/Provider/BitechxProvider.tsx";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
   title: "BitechX",
   description: "bitechX Job Task",
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <BitechxProvider>
-          <StoreProvider>{children}</StoreProvider>
-        </BitechxProvider>
-      </body>
-    </html>
-  );
+  return <html lang="en">{children}</html>;
 }
