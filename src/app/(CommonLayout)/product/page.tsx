@@ -2,9 +2,9 @@
 
 import getToken from "@/components/getToken";
 import { EmptyDemo } from "@/components/product_comp/Empty";
-import FilterPage from "@/components/product_comp/FilterPage";
 import { PaginationDemo } from "@/components/product_comp/Pagination";
 import ProductList from "@/components/product_comp/ProductList";
+import SearchFilter from "@/components/product_comp/SearchFilter";
 import LoadingProduct from "@/components/ui/Loading";
 import { Pagination } from "@/components/ui/pagination";
 import {
@@ -16,7 +16,8 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
 const ProductPage = () => {
-  const { data, isFetching: totalFetchLoading } = useTotalLengthQuery({});
+  const { data: totalFetch, isFetching: totalFetchLoading } =
+    useTotalLengthQuery({});
   const params = useSearchParams();
 
   const offset = params.get("offset");
@@ -40,9 +41,8 @@ const ProductPage = () => {
   }
 
   return products ? (
-    <div>
-      <FilterPage />
-
+    <div className=" mt-[30vh]">
+      <SearchFilter />
       <ProductList products={products} />
       <PaginationDemo products={products} totalFetch={totalFetch} />
     </div>
