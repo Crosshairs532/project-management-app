@@ -2,7 +2,7 @@ import { Skeleton } from "./skeleton";
 
 export default function LoadingProduct({ isLoaded }) {
   return (
-    <div className=" mt-[30vh] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div className=" mt-[25vh] grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map((_, idx) => (
         <div key={idx} className="flex flex-col space-y-3">
           <div className="space-y-2">

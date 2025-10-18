@@ -5,12 +5,37 @@ import { getValidImages } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ProductDialogue } from "./ProductDialogue";
+import { useDeleteProductMutation } from "@/lib/api/services/productApi";
+import toast from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
   const valid = getValidImages(product.images);
+  const [deleteProduct, { data, isSuccess, isError }] =
+    useDeleteProductMutation();
   if (!valid) {
     return;
   }
+
+  const handelDelete = async () => {
+    try {
+      const ID = toast.loading("Deleting product..");
+
+      const res = await deleteProduct(product?.id);
+
+      if (res.error) {
+        return toast.error("Product Not Found", {
+          id: ID,
+        });
+      }
+
+      toast.success("Deleted Successfully", {
+        id: ID,
+      });
+    } catch (error) {
+      toast.error(error.data.message);
+    }
+  };
+
   return (
     <Card className="py-4">
       <Link href={`/product/${product.name}`}>
@@ -34,10 +59,12 @@ const ProductCard = ({ product }) => {
         </CardBody>
       </Link>
       <CardFooter>
-        <Button className=" bg-[#AD8A64]">Delete</Button>
         <ProductDialogue product={product}>
           <Button className=" bg-[#4E6E5D]">Edit</Button>
         </ProductDialogue>
+        <Button onClick={handelDelete} className=" bg-[#AD8A64]">
+          Delete
+        </Button>
       </CardFooter>
     </Card>
   );

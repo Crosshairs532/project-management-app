@@ -31,7 +31,7 @@ const CategoryPage = () => {
     }
   );
 
-  if (isFetching) {
+  if (isFetching || totalFetchLoading || isLoading) {
     return <LoadingProduct isLoaded={isFetching} />;
   }
 

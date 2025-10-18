@@ -1,10 +1,6 @@
 "use client";
 import React from "react";
-import {
-  Sidebar,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Navbar } from "@/components/ui/Navbar";
 import BitechxProvider from "@/lib/Provider/BitechxProvider";
 import StoreProvider from "../storeProvider";
@@ -15,21 +11,17 @@ const CommonLayout = ({ children }) => {
   const pathname = usePathname();
   return (
     <>
-      <StoreProvider>
-        <BitechxProvider>
-          <div className=" min-h-screen">
-            <SidebarProvider>
-              <Navbar />
-              <SidebarTrigger />
-              <div className=" w-[100%] px-4 py-2">
-                {pathname == "/product" && <SearchFilter />}
+      <div className=" min-h-screen bg-[#EFF1F3] ">
+        <SidebarProvider>
+          <Navbar />
+          <SidebarTrigger />
+          <div className=" w-[100%] px-4 py-2 bg-[#EFF1F3] ">
+            {pathname == "/product" && <SearchFilter />}
 
-                {children}
-              </div>
-            </SidebarProvider>
+            {children}
           </div>
-        </BitechxProvider>
-      </StoreProvider>
+        </SidebarProvider>
+      </div>
     </>
   );
 };

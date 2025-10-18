@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { login as LoginState } from "../../lib/features/authSlice";
 import { useLoginMutation } from "../../lib/api/services/loginApi";
 import toast from "react-hot-toast";
-
+import Cookies from "js-cookie";
+import { usePathname, useRouter } from "next/navigation";
 const LoginForm = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const { register, handleSubmit, formState } = useForm();
   const dispatch = useAppDispatch();
   const [login, { data, isLoading, error, isSuccess, isError }] =
@@ -24,6 +27,8 @@ const LoginForm = () => {
       id: toastId,
     });
     dispatch(LoginState({ token: res.data?.token, email: data.email }));
+    Cookies.set("token", res?.data?.token, { expires: 7 });
+    router.push("/");
   };
 
   return (

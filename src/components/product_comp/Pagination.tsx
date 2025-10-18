@@ -104,7 +104,6 @@ export function PaginationDemo({ products, totalFetch }) {
           </>
         )}
 
-        {/* Main visible page numbers */}
         {visiblePages.map((page) => (
           <PaginationItem key={page}>
             <PaginationLink

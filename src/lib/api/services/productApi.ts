@@ -44,7 +44,7 @@ const productApi = baseApi.injectEndpoints({
     singleProduct: build.query({
       query: ({ productname }) => {
         const decoded = decodeURIComponent(productname).replace(/\+/g, " ");
-
+        console.log(decoded);
         return {
           url: `/products/${decoded}`,
           method: "GET",
@@ -53,12 +53,31 @@ const productApi = baseApi.injectEndpoints({
       providesTags: ["products"],
     }),
     updateProduct: build.mutation({
-      query: ({ productname }) => {
-        const decoded = decodeURIComponent(productname).replace(/\+/g, " ");
+      query: (data) => {
+        const { id, ...other } = data;
         return {
-          url: `/products/${decoded}`,
+          url: `/products/${id}`,
           method: "PUT",
-          body: productname,
+          body: other,
+        };
+      },
+      invalidatesTags: ["products"],
+    }),
+    deleteProduct: build.mutation({
+      query: (id) => {
+        return {
+          url: `/products/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["products"],
+    }),
+    addProduct: build.mutation({
+      query: (data) => {
+        return {
+          url: `/products`,
+          method: "POST",
+          body: data,
         };
       },
       invalidatesTags: ["products"],
@@ -71,4 +90,7 @@ export const {
   useTotalLengthProductQuery,
   useSearchProductsQuery,
   useSingleProductQuery,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
+  useAddProductMutation,
 } = productApi;

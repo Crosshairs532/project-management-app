@@ -25,15 +25,9 @@ const ProductPage = () => {
   const categoryId = params?.get("categoryId");
   const searchedText = params?.get("searchedText");
 
-  if (offset) {
-    searchParams[offset] = offset;
-  }
-  if (limit) {
-    searchParams[limit] = limit;
-  }
-  if (categoryId) {
-    searchParams[categoryId] = categoryId;
-  }
+  if (offset) searchParams["offset"] = offset;
+  if (limit) searchParams["limit"] = limit;
+  if (categoryId) searchParams["categoryId"] = categoryId;
 
   // const {
   //   data: products,

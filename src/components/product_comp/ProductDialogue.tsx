@@ -10,26 +10,40 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useUpdateProductMutation } from "@/lib/api/services/productApi";
+import toast from "react-hot-toast";
 
 export function ProductDialogue({ children, product }) {
-  console.log(product);
+  const [updateProduct, { data, isError, isLoading, isSuccess }] =
+    useUpdateProductMutation({});
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = {
+      id: product.id,
       name: e.target.name.value,
       description: e.target.description.value,
     };
+    try {
+      const toastId = toast.loading("Updating..");
+      const res = updateProduct(data);
 
-    console.log(data);
+      console.log(res);
+
+      toast.success("Updated Successfully", {
+        id: toastId,
+      });
+    } catch (error) {
+      toast.error("Update failed!");
+    }
   };
   return (
     <Dialog>
-      <form onSubmit={handleSubmit}>
-        <DialogTrigger asChild>{children}</DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit Product</DialogTitle>
-          </DialogHeader>
+      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Edit Product</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4">
             <div className="grid gap-3">
               <label htmlFor="name-1">Product Name:</label>
@@ -48,13 +62,11 @@ export function ProductDialogue({ children, product }) {
               />
             </div>
           </div>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit">Save changes</Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </form>
+          <DialogClose asChild>
+            <Button type="submit">Save changes</Button>
+          </DialogClose>
+        </form>
+      </DialogContent>
     </Dialog>
   );
 }
