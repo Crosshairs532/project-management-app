@@ -16,7 +16,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
 const ProductPage = () => {
-  const { data, isFetching: totalFetch } = useTotalLengthQuery({});
+  const { data, isFetching: totalFetchLoading } = useTotalLengthQuery({});
   const params = useSearchParams();
 
   const offset = params.get("offset");
@@ -31,7 +31,7 @@ const ProductPage = () => {
   } = useGetAllProductsQuery(
     { offset, limit },
     {
-      skip: totalFetch,
+      skip: totalFetchLoading,
     }
   );
 
@@ -42,9 +42,9 @@ const ProductPage = () => {
   return products ? (
     <div>
       <FilterPage />
-      <PaginationDemo products={products} />
 
       <ProductList products={products} />
+      <PaginationDemo products={products} totalFetch={totalFetch} />
     </div>
   ) : (
     <EmptyDemo />

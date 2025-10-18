@@ -25,7 +25,25 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["products"],
     }),
+    searchProducts: build.query({
+      query: ({ searchedText, offset = 0, limit = 10 }) => {
+        const params = new URLSearchParams();
+        if (searchedText) params.set("searchedText", searchedText);
+        params.set("offset", offset.toString());
+        params.set("limit", limit.toString());
+
+        return {
+          url: `/products/search?${params.toString()}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["products"],
+    }),
   }),
   overrideExisting: false,
 });
-export const { useGetAllProductsQuery, useTotalLengthQuery } = productApi;
+export const {
+  useGetAllProductsQuery,
+  useTotalLengthQuery,
+  useSearchProductsQuery,
+} = productApi;
