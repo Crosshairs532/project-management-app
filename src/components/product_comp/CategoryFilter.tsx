@@ -13,23 +13,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useGetAllCategoryQuery } from "@/lib/api/services/categoryApi";
+import { P } from "framer-motion/dist/types.d-BJcRxCew";
 
-export function DropdownMenuRadioGroupDemo() {
+export function CategoryFilter() {
   const [position, setPosition] = React.useState("bottom");
   const { data, isFetching } = useGetAllCategoryQuery({});
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button variant="outline">Search by category</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        {isFetching && (
+          <p className=" text-center text-sm">No Categories to show..</p>
+        )}
         <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-          <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+          {data?.map((category, idx) => {
+            return (
+              <DropdownMenuRadioItem value={`${category.name}`}>
+                {category.name}
+              </DropdownMenuRadioItem>
+            );
+          })}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

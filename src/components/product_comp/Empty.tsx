@@ -11,24 +11,26 @@ import {
 } from "@/components/ui/empty";
 import Link from "next/link";
 
-export function EmptyDemo() {
+export function EmptyDemo({ name }) {
   return (
     <Empty>
       <EmptyHeader>
         <EmptyMedia variant="icon">{/* <IconFolderCode /> */}</EmptyMedia>
-        <EmptyTitle>No Projects Yet</EmptyTitle>
+        <EmptyTitle>No {name} Yet</EmptyTitle>
         <EmptyDescription>
-          You haven&apos;t created any projects yet. Get started by creating
-          your first project.
+          You haven&apos;t created any name {name} yet.{" "}
+          {name == "product" && "Get started by creating your first project."}
         </EmptyDescription>
       </EmptyHeader>
-      <EmptyContent>
-        <div className="flex gap-2">
-          <Button>
-            <Link href={"/add-product"}>Create Project</Link>
-          </Button>
-        </div>
-      </EmptyContent>
+      {name == "product" && (
+        <EmptyContent>
+          <div className="flex gap-2">
+            <Button>
+              <Link href={"/add-product"}>Create Project</Link>
+            </Button>
+          </div>
+        </EmptyContent>
+      )}
     </Empty>
   );
 }

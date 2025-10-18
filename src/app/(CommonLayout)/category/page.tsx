@@ -1,21 +1,16 @@
 "use client";
 
-import getToken from "@/components/getToken";
+import CategoryList from "@/components/category_comp/CategoryList";
 import { EmptyDemo } from "@/components/product_comp/Empty";
 import { PaginationDemo } from "@/components/product_comp/Pagination";
-import ProductList from "@/components/product_comp/ProductList";
-import SearchFilter from "@/components/product_comp/SearchFilter";
 import LoadingProduct from "@/components/ui/Loading";
-import { Pagination } from "@/components/ui/pagination";
 import {
-  useGetAllProductsQuery,
+  useGetAllCategoryQuery,
   useTotalLengthQuery,
-} from "@/lib/api/services/productApi";
-import { useAppSelector } from "@/lib/hooks";
+} from "@/lib/api/services/categoryApi";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
 
-const ProductPage = () => {
+const CategoryPage = () => {
   const { data: totalFetch, isFetching: totalFetchLoading } =
     useTotalLengthQuery({});
   const params = useSearchParams();
@@ -24,12 +19,12 @@ const ProductPage = () => {
   const limit = params.get("limit");
 
   const {
-    data: products,
+    data: category,
     isFetching,
     isLoading,
     refetch,
     ...other
-  } = useGetAllProductsQuery(
+  } = useGetAllCategoryQuery(
     { offset, limit },
     {
       skip: totalFetchLoading,
@@ -40,14 +35,14 @@ const ProductPage = () => {
     return <LoadingProduct isLoaded={isFetching} />;
   }
 
-  return products ? (
+  return category ? (
     <div className=" ">
-      <ProductList products={products} />
-      <PaginationDemo products={products} totalFetch={totalFetch} />
+      <CategoryList products={category} />
+      <PaginationDemo products={category} totalFetch={totalFetch} />
     </div>
   ) : (
-    <EmptyDemo name={"product"} />
+    <EmptyDemo name={"category"} />
   );
 };
 
-export default ProductPage;
+export default CategoryPage;

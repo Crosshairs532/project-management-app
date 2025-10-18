@@ -7,7 +7,7 @@ const SearchFilter = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   return (
-    <div className=" flex justify-between mb-4">
+    <div className=" mt-[10vh] flex justify-between mb-4">
       <div className="search "></div>
       <div className="category_filter">
         <CategoryFilter />
