@@ -22,6 +22,7 @@ const ProductPage = () => {
 
   const offset = params.get("offset");
   const limit = params.get("limit");
+  const categoryId = params.get("categoryId");
 
   const {
     data: products,
@@ -30,7 +31,7 @@ const ProductPage = () => {
     refetch,
     ...other
   } = useGetAllProductsQuery(
-    { offset, limit },
+    { offset, limit, categoryId },
     {
       skip: totalFetchLoading,
     }

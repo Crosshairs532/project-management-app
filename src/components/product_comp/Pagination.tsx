@@ -69,7 +69,6 @@ export function PaginationDemo({ products, totalFetch }) {
   return (
     <Pagination className="mt-8">
       <PaginationContent>
-        {/* Previous */}
         <PaginationItem>
           <PaginationPrevious
             href="#"
