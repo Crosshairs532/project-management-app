@@ -53,6 +53,7 @@ export function CategoryFilter() {
           {data?.map((category, idx) => {
             return (
               <DropdownMenuRadioItem
+                key={idx}
                 onClick={() => handleCategory(category.id)}
                 value={`${category.id}`}
               >

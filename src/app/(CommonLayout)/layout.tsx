@@ -15,8 +15,8 @@ const CommonLayout = ({ children }) => {
   const pathname = usePathname();
   return (
     <>
-      <BitechxProvider>
-        <StoreProvider>
+      <StoreProvider>
+        <BitechxProvider>
           <div className=" min-h-screen">
             <SidebarProvider>
               <Navbar />
@@ -28,8 +28,8 @@ const CommonLayout = ({ children }) => {
               </div>
             </SidebarProvider>
           </div>
-        </StoreProvider>
-      </BitechxProvider>
+        </BitechxProvider>
+      </StoreProvider>
     </>
   );
 };

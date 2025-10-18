@@ -1,5 +1,6 @@
 import React from "react";
 import LoginForm from "../../../components/forms/LoginForm";
+export const dynamic = "force-dynamic";
 const LoginPage = () => {
   return (
     <div className=" grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-x-2.5 h-[100vh]">

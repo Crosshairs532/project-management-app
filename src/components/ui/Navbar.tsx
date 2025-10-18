@@ -9,8 +9,6 @@ import { Calendar, Home, Inbox, Package, Plus } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
@@ -48,7 +46,7 @@ export function Navbar() {
         <div className=" bg-[#A44A3F] text-[#EFF1F3] w-fit h-fit rounded-full">
           <Plus />
         </div>
-        <Link href={"/add-product"}>Create new project</Link>
+        <Link href={"/add-product"}>Create new product</Link>
         {/* </SidebarMenuButton> */}
       </div>
       {/* </SidebarContent> */}

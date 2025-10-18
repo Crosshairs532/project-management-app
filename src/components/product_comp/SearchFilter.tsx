@@ -25,7 +25,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className=" mt-[10vh] flex justify-between mb-4">
+    <div className=" mt-[10vh] flex-col md:flex lg:flex justify-between mb-4">
       <div className="search ">
         <form
           className=" flex items-center gap-1"

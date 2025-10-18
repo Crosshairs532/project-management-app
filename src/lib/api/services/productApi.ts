@@ -5,15 +5,15 @@ const productApi = baseApi.injectEndpoints({
     getAllProducts: build.query({
       query: (param) => {
         const params = new URLSearchParams(param);
-
+        console.log(params);
         return {
-          url: `/products?${params.toString()}`,
+          url: `/products?${params?.toString()}`,
           method: "GET",
         };
       },
       providesTags: ["products"],
     }),
-    totalLength: build.query({
+    totalLengthProduct: build.query({
       query: () => {
         return {
           url: `/products`,
@@ -41,11 +41,34 @@ const productApi = baseApi.injectEndpoints({
       },
       providesTags: ["products"],
     }),
+    singleProduct: build.query({
+      query: ({ productname }) => {
+        const decoded = decodeURIComponent(productname).replace(/\+/g, " ");
+
+        return {
+          url: `/products/${decoded}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["products"],
+    }),
+    updateProduct: build.mutation({
+      query: ({ productname }) => {
+        const decoded = decodeURIComponent(productname).replace(/\+/g, " ");
+        return {
+          url: `/products/${decoded}`,
+          method: "PUT",
+          body: productname,
+        };
+      },
+      invalidatesTags: ["products"],
+    }),
   }),
   overrideExisting: false,
 });
 export const {
   useGetAllProductsQuery,
-  useTotalLengthQuery,
+  useTotalLengthProductQuery,
   useSearchProductsQuery,
+  useSingleProductQuery,
 } = productApi;
