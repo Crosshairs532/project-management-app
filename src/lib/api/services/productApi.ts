@@ -32,6 +32,8 @@ const productApi = baseApi.injectEndpoints({
         params.set("offset", offset.toString());
         params.set("limit", limit.toString());
 
+        console.log(params.toString());
+
         return {
           url: `/products/search?${params.toString()}`,
           method: "GET",

@@ -9,6 +9,7 @@ import LoadingProduct from "@/components/ui/Loading";
 import { Pagination } from "@/components/ui/pagination";
 import {
   useGetAllProductsQuery,
+  useSearchProductsQuery,
   useTotalLengthQuery,
 } from "@/lib/api/services/productApi";
 import { useAppSelector } from "@/lib/hooks";
@@ -19,10 +20,10 @@ const ProductPage = () => {
   const { data: totalFetch, isFetching: totalFetchLoading } =
     useTotalLengthQuery({});
   const params = useSearchParams();
-
   const offset = params.get("offset");
   const limit = params.get("limit");
   const categoryId = params.get("categoryId");
+  const searchedText = params.get("searchedText");
 
   const {
     data: products,
@@ -30,13 +31,12 @@ const ProductPage = () => {
     isLoading,
     refetch,
     ...other
-  } = useGetAllProductsQuery(
-    { offset, limit, categoryId },
-    {
-      skip: totalFetchLoading,
-    }
-  );
-
+  } = searchedText
+    ? useSearchProductsQuery({ searchedText, offset, limit })
+    : useGetAllProductsQuery(
+        { offset, limit, categoryId },
+        { skip: totalFetchLoading }
+      );
   if (isFetching) {
     return <LoadingProduct isLoaded={isFetching} />;
   }

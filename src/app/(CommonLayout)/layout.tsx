@@ -14,7 +14,7 @@ import { usePathname } from "next/navigation";
 const CommonLayout = ({ children }) => {
   const pathname = usePathname();
   return (
-    <body className={`antialiased`} suppressHydrationWarning={true}>
+    <>
       <BitechxProvider>
         <StoreProvider>
           <div className=" min-h-screen">
@@ -30,7 +30,7 @@ const CommonLayout = ({ children }) => {
           </div>
         </StoreProvider>
       </BitechxProvider>
-    </body>
+    </>
   );
 };
 
